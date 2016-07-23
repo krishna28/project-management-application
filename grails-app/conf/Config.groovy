@@ -11,6 +11,7 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+grails.config.locations = [ "classpath:application-config.properties"]
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
@@ -103,9 +104,9 @@ environments {
 log4j = {
     // Example of changing the log pattern for the default console appender:
     //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    appenders {
+        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    }
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -117,5 +118,57 @@ log4j = {
            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
            'org.springframework',
            'org.hibernate',
-           'net.sf.ehcache.hibernate'
+           'net.sf.ehcache.hibernate',
+           'grails.plugin.springsecurity',
+           'grails.app.controllers.grails.plugin.springsecurity',
+           'grails.app.services.grails.plugin.springsecurity',
+           'org.pac4j',
+           'org.springframework.security'
 }
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.krishna.example.auth.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.krishna.example.auth.UserRole'
+grails.plugin.springsecurity.authority.className = 'com.krishna.example.auth.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/welcome':                       ['permitAll'],
+	'/welcome.gsp':                   ['permitAll'],
+	'/register/**':                   ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+    '/api/**':                        ['IS_AUTHENTICATED_FULLY'],
+	'/**/favicon.ico':                ['permitAll']
+]
+
+// Spring security configuration added by krishna 21-07-16
+grails.plugin.springsecurity.logout.afterLogoutUrl = '/'
+grails.plugin.springsecurity.logout.postOnly = false
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/home'
+grails.plugin.springsecurity.successHandler.ajaxSuccessUrl = '/home'
+
+
+
+
+//rest spring security configuration
+grails.plugin.springsecurity.rest.login.endpointUrl="/api/login"
+grails.plugin.springsecurity.rest.logout.endpointUrl='/api/logout'
+grails.plugin.springsecurity.rememberMe.persistent = false
+grails.plugin.springsecurity.rest.login.useJsonCredentials = true
+grails.plugin.springsecurity.rest.login.failureStatusCode = 401
+grails.plugin.springsecurity.rest.token.storage.useGorm = true
+grails.plugin.springsecurity.rest.token.storage.gorm.tokenDomainClassName = 'com.krishna.example.auth.AuthToken'
+grails.plugin.springsecurity.rest.token.storage.gorm.tokenValuePropertyName = 'token'
+grails.plugin.springsecurity.rest.token.storage.gorm.usernamePropertyName = 'username'
+grails.plugin.springsecurity.filterChain.chainMap = [
+        '/auth/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter, -rememberMeAuthenticationFilter', // Stateless chain
+        '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter', // Stateless chain
+        '/**': 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'   // Traditional chain
+]
+
+grails.plugin.springsecurity.rest.token.validation.active =	true
+//grails.plugin.springsecurity.rest.token.validation.headerName =	'X-Auth-Token'
+//grails.plugin.springsecurity.rest.token.validation.endpointUrl =	'/api/validate'

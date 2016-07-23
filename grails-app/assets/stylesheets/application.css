@@ -1,0 +1,16 @@
+/*
+ * This is a manifest file that will be compile into admin application.css,
+ * which will include all the files from admin-css and its sub-directories.
+ *
+ * Any CSS file within this directory can be referenced here using a relative path.
+ *
+ * We're free to add CSS to this file and they'll appear at the top
+ * of the compile file, but it's generally better to create a new file per CSS scope.
+ *
+ * */
+
+/*
+*=require bootstrap/dist/css/bootstrap
+*=require_full_tree bootstrap/dist/css/fonts
+*=require_self
+*/

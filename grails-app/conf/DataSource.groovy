@@ -23,8 +23,16 @@ environments {
     }
     test {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+//            dbCreate = "update"
+//            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+
+            dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = ""
+            driverClassName = ""
+            username = ""
+            password = ""
+
+
         }
     }
     production {

@@ -6,8 +6,14 @@ class UrlMappings {
                 // apply constraints here
             }
         }
-
-        "/"(view:"/index")
+        "/api/user"(resources:'home')
+        "/register"(resources:'register')
+        "/api/project"(resources: 'project') {
+            "/task"(resources: 'task') {
+                "/comment"(resources: 'comment')
+            }
+        }
+        "/"(view:"/welcome")
         "500"(view:'/error')
 	}
 }
