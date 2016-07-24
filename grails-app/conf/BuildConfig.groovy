@@ -64,7 +64,7 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:2.0-RC4"
 
         compile ":spring-security-rest:1.4.0.RC2", {
-            excludes 'spring-security-core', 'cors'
+            excludes 'spring-security-core'
         }
 
         // plugins needed at runtime but not for compilation

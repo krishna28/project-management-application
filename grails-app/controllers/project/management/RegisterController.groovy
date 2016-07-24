@@ -25,7 +25,7 @@ class RegisterController extends RestfulController {
     def save() {
         try {
             def saltString = getGrailsApplication().config.custom.security.saltString
-            println saltString
+            def responseObject = [:]
             String encodedPassword = springSecurityService.encodePassword(params.password, saltString)
             def user = new User(password: encodedPassword,
                     accountLocked: false,
@@ -35,8 +35,13 @@ class RegisterController extends RestfulController {
                     username: params.username,
             )
             user.save(failOnError: true)
-
             def role = new UserRole(user: user, role: Role.findWhere(authority: 'ROLE_USER')).save(failOnError: true);
+            if(user.save()){
+
+                responseObject['status'] = 200;
+                responseObject['message'] = "ok";
+                respond responseObject
+            }
         } catch (Exception e) {
             println e;
         }

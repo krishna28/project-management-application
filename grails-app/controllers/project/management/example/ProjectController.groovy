@@ -7,24 +7,22 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
 @Transactional(readOnly = false)
+@Secured(['IS_AUTHENTICATED_FULLY'])
 class ProjectController extends RestfulController {
 
 //    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
     static responseFormats = ['json', 'xml']
     ProjectController(){
-        super(ProjectController)
+        super(Project)
     }
 
-    @Secured(['ROLE_MANAGER'])
+    @Secured(['ROLE_USER','ROLE_MANAGER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Project.list(params), model: [projectInstanceCount: Project.count()]
     }
 
-    def show(Project projectInstance) {
-        respond projectInstance
-    }
-
+    @Secured(['ROLE_MANAGER'])
     def create() {
         respond new Project(params)
     }
@@ -38,6 +36,36 @@ class ProjectController extends RestfulController {
         respond project
 
 
+    }
+    @Secured(['ROLE_USER','ROLE_MANAGER'])
+    def show(){
+        def id = params.id;
+        def projectInstance = Project.get(id);
+        respond projectInstance
+    }
+
+    @Secured(['ROLE_MANAGER'])
+    def edit(){
+        def id = params.id;
+        def projectInstance = Project.get(id);
+        bindData(projectInstance, params, [exclude: ['id']])
+        respond projectInstance
+    }
+
+    @Secured(['ROLE_MANAGER'])
+    def update(){
+        def id = params.id;
+        def projectInstance = Project.get(id);
+        bindData(projectInstance, params, [exclude: ['id']])
+        respond projectInstance
+    }
+
+
+    @Secured(['ROLE_MANAGER'])
+    def delete(){
+        def id = params.id;
+        def projectInstance = Project.get(id);
+        projectInstance.delete()
     }
 
 
