@@ -1,104 +1,96 @@
 package project.management.example
 
-
+import com.krishna.example.auth.User
+import grails.plugin.springsecurity.annotation.Secured
+import grails.rest.RestfulController
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
-class CommentController {
+@Transactional(readOnly = false)
+@Secured(['IS_AUTHENTICATED_FULLY'])
+class CommentController extends RestfulController  {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+//    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static responseFormats = ['json', 'xml']
+    CommentController(){
+        super(Comment)
+    }
 
+    @Secured(['ROLE_USER','ROLE_MANAGER'])
     def index(Integer max) {
+        def responseObject = [:]
         params.max = Math.min(max ?: 10, 100)
-        respond Comment.list(params), model:[commentInstanceCount: Comment.count()]
+        def projectId = params.projectId
+        def taskId = params.taskId
+        responseObject['commentList'] = Comment.where {
+            task.id == taskId && project.id == projectId
+        }.list(params)
+        responseObject['commentCount'] = Comment.count();
+        respond responseObject;
     }
 
-    def show(Comment commentInstance) {
-        respond commentInstance
+    @Secured(['ROLE_MANAGER','ROLE_USER'])
+    def save(){
+        def responseObject = [:]
+        def comment =  new Comment();
+        def taskInstance = Task.get(params.taskId);
+        def user = User.get(params.userId);
+        def projectInstance = Project.get(params.projectId);
+        comment.commentNote = params.commentNote;
+        comment.project = projectInstance;
+        comment.user = user;
+        taskInstance.addToComments(comment);
+        taskInstance.save(flush: true,failOnError: true);
+        if(comment.save()){
+            responseObject['status'] = 200;
+            responseObject['message'] = "ok";
+            responseObject['comment'] = comment;
+        }
+        respond responseObject
+
     }
 
+    @Secured(['ROLE_MANAGER'])
     def create() {
         respond new Comment(params)
     }
 
-    @Transactional
-    def save(Comment commentInstance) {
-        if (commentInstance == null) {
-            notFound()
-            return
-        }
 
-        if (commentInstance.hasErrors()) {
-            respond commentInstance.errors, view:'create'
-            return
-        }
-
-        commentInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'comment.label', default: 'Comment'), commentInstance.id])
-                redirect commentInstance
-            }
-            '*' { respond commentInstance, [status: CREATED] }
-        }
-    }
-
-    def edit(Comment commentInstance) {
+    @Secured(['ROLE_USER','ROLE_MANAGER'])
+    def show(){
+        def id = params.id;
+        def commentInstance = Comment.get(id);
         respond commentInstance
     }
 
-    @Transactional
-    def update(Comment commentInstance) {
-        if (commentInstance == null) {
-            notFound()
-            return
-        }
+    @Secured(['ROLE_MANAGER','ROLE_USER'])
+    def edit(){
+        def id = params.id;
+        def commentInstance = Comment.get(id);
+        bindData(commentInstance, params, [exclude: ['id']])
+        respond commentInstance
+    }
 
-        if (commentInstance.hasErrors()) {
-            respond commentInstance.errors, view:'edit'
-            return
-        }
 
-        commentInstance.save flush:true
+    @Secured(['ROLE_MANAGER','ROLE_USER'])
+    def update(){
+        def id = params.id;
+        def commentInstance = Comment.get(id);
+        bindData(commentInstance, params, [exclude: ['id']])
+        respond commentInstance
+    }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Comment.label', default: 'Comment'), commentInstance.id])
-                redirect commentInstance
-            }
-            '*'{ respond commentInstance, [status: OK] }
+
+    @Secured(['ROLE_MANAGER'])
+    def delete(){
+        try {
+            def id = params.id;
+            def commentInstance = Comment.get(id);
+            commentInstance.delete()
+        }catch(Exception ex){
+          println ex
         }
     }
 
-    @Transactional
-    def delete(Comment commentInstance) {
-
-        if (commentInstance == null) {
-            notFound()
-            return
-        }
-
-        commentInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Comment.label', default: 'Comment'), commentInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'comment.label', default: 'Comment'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
 }

@@ -1,5 +1,7 @@
 package com.krishna.example.auth
 
+import project.management.example.Task
+
 class User {
 
 	transient springSecurityService
@@ -12,6 +14,8 @@ class User {
 	boolean passwordExpired
 
 	static transients = ['springSecurityService']
+
+    static hasMany = [tasks:Task]
 
 	static constraints = {
 		username blank: false, unique: true

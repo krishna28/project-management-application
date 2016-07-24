@@ -5,6 +5,7 @@ import com.krishna.example.auth.User
 import com.krishna.example.auth.UserRole
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.RestfulController
+import org.springframework.transaction.annotation.Transactional
 
 class RegisterController extends RestfulController {
     static responseFormats = ['json', 'xml']
@@ -14,14 +15,14 @@ class RegisterController extends RestfulController {
         super(RegisterController)
     }
 
-//   @Secured(['ROLE_MANAGER'])
-   @Override
+    @Override
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model: [userInstanceCount: User.count()]
     }
 
-@Override
+    @Override
+    @Transactional
     def save() {
         try {
             def saltString = getGrailsApplication().config.custom.security.saltString
@@ -36,7 +37,7 @@ class RegisterController extends RestfulController {
             )
             user.save(failOnError: true)
             def role = new UserRole(user: user, role: Role.findWhere(authority: 'ROLE_USER')).save(failOnError: true);
-            if(user.save()){
+            if (user.save()) {
 
                 responseObject['status'] = 200;
                 responseObject['message'] = "ok";
@@ -49,24 +50,24 @@ class RegisterController extends RestfulController {
     }
 
     @Override
-    def delete(){
+    def delete() {
         def userInstance = User.findById(params.id);
-        def instances =  UserRole.findByUser(userInstance);
+        def instances = UserRole.findByUser(userInstance);
 
-            instances.each {user->
-                user.delete()
-            }
+        instances.each { user ->
+            user.delete()
+        }
 
-            if (userInstance == null) {
-                notFound()
-                return
-            }
+        if (userInstance == null) {
+            notFound()
+            return
+        }
 
-            userInstance.delete flush: true
+        userInstance.delete flush: true
     }
 
     @Override
-    def show(){
+    def show() {
         respond User.get(params.id)
     }
 }

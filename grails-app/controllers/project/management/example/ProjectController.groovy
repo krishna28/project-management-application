@@ -18,8 +18,11 @@ class ProjectController extends RestfulController {
 
     @Secured(['ROLE_USER','ROLE_MANAGER'])
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Project.list(params), model: [projectInstanceCount: Project.count()]
+        def responseObject = [:]
+        params.max = params?.maxResultSet?:Math.min(max ?: 10, 100)
+        responseObject['projectList'] = Project.list(params);
+        responseObject['projectCount'] = Project.count();
+        respond responseObject
     }
 
     @Secured(['ROLE_MANAGER'])
@@ -28,13 +31,15 @@ class ProjectController extends RestfulController {
     }
     @Secured(['ROLE_MANAGER'])
     def save(){
-
+        def responseObject = [:]
         def project =  new Project();
         project.projectName = params.projectName
         project.description = params.description
-        project.save()
-        respond project
-
+        if(project.save()){
+            responseObject['status'] = 200;
+            responseObject['message'] = "ok";
+        }
+        respond responseObject
 
     }
     @Secured(['ROLE_USER','ROLE_MANAGER'])

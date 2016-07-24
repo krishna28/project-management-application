@@ -1,11 +1,17 @@
 package project.management.example
 
+import com.krishna.example.auth.User
+
 class Comment {
 
-   String comment
-   static belongsTo = [task:Task]
+   User user
+   String commentNote
+   static belongsTo = [task:Task,project:Project]
 
     static constraints = {
+        user(nullable: false, blank:false)
+        commentNote(nullable: false,blank:false)
+        task(nullable: false,blank:false)
     }
 }
 
