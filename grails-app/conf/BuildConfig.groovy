@@ -40,6 +40,7 @@ grails.project.dependency.resolution = {
         mavenLocal()
         grailsCentral()
         mavenCentral()
+
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -70,7 +71,10 @@ grails.project.dependency.resolution = {
         compile "org.grails.plugins:heroku:1.0.1"
 
         compile ":database-session:1.2.1"
-        compile ':heroku:1.0.1'
+
+        compile(':heroku:1.0.1') {
+            exclude 'database-session'
+        }
         compile ':cloud-support:1.0.8'
 //
         // plugins needed at runtime but not for compilation

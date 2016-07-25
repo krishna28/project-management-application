@@ -37,12 +37,12 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "update"
-            driverClassName = "org.postgresql.Driver"
-            dialect = "org.hibernate.dialect.PostgreSQLDialect"
-            dataSource.url="postgres://oxuuylxlacqdqz:TSvo071GzosOHJKTw0kT0LitaN@ec2-54-225-81-90.compute-1.amazonaws.com:5432/dbpkhsts2tpbno"
-            dataSource.username="oxuuylxlacqdqz"
-            dataSource.password="TSvo071GzosOHJKTw0kT0LitaN"
+            dbCreate =""
+            driverClassName = ""
+            dialect =""
+            dataSource.url=""
+            dataSource.username=""
+            dataSource.password=""
 
         }
     }

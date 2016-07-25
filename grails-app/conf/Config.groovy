@@ -144,6 +144,10 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll']
 ]
 
+
+grails.plugin.databasesession.enabled = false
+
+
 // Spring security configuration added by krishna 21-07-16
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/'
 grails.plugin.springsecurity.logout.postOnly = false
