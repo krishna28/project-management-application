@@ -67,6 +67,7 @@ grails.project.dependency.resolution = {
         compile ":spring-security-rest:1.4.0.RC2", {
             excludes 'spring-security-core'
         }
+        compile "org.grails.plugins:heroku:1.0.1"
 
         compile ":database-session:1.2.1"
         compile ':heroku:1.0.1'
