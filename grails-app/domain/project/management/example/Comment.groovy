@@ -13,6 +13,9 @@ class Comment {
         commentNote(nullable: false,blank:false)
         task(nullable: false,blank:false)
     }
+    static mapping ={
+        table 'table_comment'
+    }
 }
 
 

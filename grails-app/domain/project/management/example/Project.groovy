@@ -14,4 +14,7 @@ class Project {
     static constraints = {
         projectName(blank: false,nullable: false,unique: true)
     }
+    static mapping ={
+        table 'table_project'
+    }
 }

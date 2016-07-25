@@ -11,4 +11,7 @@ class Task {
     static constraints = {
     }
 
+    static mapping ={
+        table 'table_task'
+    }
 }
