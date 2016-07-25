@@ -36,7 +36,9 @@ class CommentController extends RestfulController  {
         def responseObject = [:]
         def comment =  new Comment();
         def taskInstance = Task.get(params.taskId);
-        def user = User.get(params.userId);
+
+        //we can inject spring security here and double check if logged in user is posting the commment
+        def user = User.findByUsername(params.userId);
         def projectInstance = Project.get(params.projectId);
         comment.commentNote = params.commentNote;
         comment.project = projectInstance;

@@ -40,12 +40,9 @@ environments {
             dbCreate = "update"
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"
-
-            uri = new URI(System.env.DATABASE_URL ?: "postgres://searchkisu@gmail.com:Welcome@123/TestDB")
-            println "---1---${uri}---${uri.host}---${uri.path}---${uri.userInfo}---"
-            url = "jdbc:postgresql://" + uri.host + uri.path
-            username = uri.userInfo.split(":")[0]
-            password = uri.userInfo.split(":")[1]
+            dataSource.url="postgres://oxuuylxlacqdqz:TSvo071GzosOHJKTw0kT0LitaN@ec2-54-225-81-90.compute-1.amazonaws.com:5432/dbpkhsts2tpbno"
+            dataSource.username="oxuuylxlacqdqz"
+            dataSource.password="TSvo071GzosOHJKTw0kT0LitaN"
 
         }
     }
