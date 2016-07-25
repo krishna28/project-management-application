@@ -1,3 +1,5 @@
+import grails.plugin.heroku.PostgresqlServiceInfo
+
 dataSource {
     pooled = true
     jmxExport = true
@@ -44,11 +46,21 @@ environments {
             dbCreate = "update"
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"
-            uri = new URI(System.env.DATABASE_URL)
+            String DATABASE_URL = System.getenv('DATABASE_URL')
+            PostgresqlServiceInfo info = new PostgresqlServiceInfo()
+            if (DATABASE_URL) {
+                try {
+                    println "\nPostgreSQL service ($DATABASE_URL): url='$info.url', " +
+                            "user='$info.username', password='$info.password'\n"
+                }
+                catch (e) {
+                    println "Error occurred parsing DATABASE_URL: $e.message"
+                }
+            }
 
-            url = "jdbc:postgresql://"+uri.host+uri.path
-            username = uri.userInfo.split(":")[0]
-            password = uri.userInfo.split(":")[1]
+            url = "jdbc:"+info.url
+            username = info.username
+            password = info.password
 
         }
     }
