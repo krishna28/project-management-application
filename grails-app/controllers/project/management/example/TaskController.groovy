@@ -3,6 +3,7 @@ package project.management.example
 import com.krishna.example.auth.User
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.RestfulController
+import jline.internal.Log
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -18,6 +19,7 @@ class TaskController extends RestfulController {
 
     @Secured(['ROLE_USER','ROLE_MANAGER'])
     def index(Integer max) {
+        println params;
         def responseObject = [:]
         params.max = params?.maxResultSet?:Math.min(max ?: 10, 100)
         def projectId = params.projectId
@@ -76,15 +78,24 @@ class TaskController extends RestfulController {
         def id = params.id;
         def taskInstance = Task.get(id);
         bindData(taskInstance, params, [exclude: ['id']])
+        taskInstance.save(flush: true);
         respond taskInstance
     }
 
 
     @Secured(['ROLE_MANAGER'])
     def delete(){
-        def id = params.id;
-        def taskInstance = Task.get(id);
-        taskInstance.delete()
+        try {
+            def responseObject = [:]
+            def id = params.id;
+            def taskInstance = Task.get(id);
+            taskInstance.delete()
+            responseObject['status'] = 200;
+            responseObject['message'] = "ok";
+
+        }catch(Exception e){
+            Log.error(e);
+        }
     }
 
 

@@ -71,7 +71,7 @@ grails.project.dependency.resolution = {
         compile ":database-session:1.2.1"
         compile ':heroku:1.0.1'
         compile ':cloud-support:1.0.8'
-
+//
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.16" // or ":hibernate4:4.3.5.4"
         runtime ":database-migration:1.4.0"

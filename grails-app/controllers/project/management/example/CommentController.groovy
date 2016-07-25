@@ -3,6 +3,7 @@ package project.management.example
 import com.krishna.example.auth.User
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.RestfulController
+import jline.internal.Log
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -20,7 +21,7 @@ class CommentController extends RestfulController  {
     @Secured(['ROLE_USER','ROLE_MANAGER'])
     def index(Integer max) {
         def responseObject = [:]
-        params.max = Math.min(max ?: 10, 100)
+        params.max = params?.maxResultSet?:Math.min(max ?: 10, 100)
         def projectId = params.projectId
         def taskId = params.taskId
         responseObject['commentList'] = Comment.where {
@@ -78,6 +79,7 @@ class CommentController extends RestfulController  {
         def id = params.id;
         def commentInstance = Comment.get(id);
         bindData(commentInstance, params, [exclude: ['id']])
+        commentInstance.save(flush:true);
         respond commentInstance
     }
 
@@ -85,11 +87,14 @@ class CommentController extends RestfulController  {
     @Secured(['ROLE_MANAGER'])
     def delete(){
         try {
+            def responseObject = [:]
             def id = params.id;
             def commentInstance = Comment.get(id);
             commentInstance.delete()
+            responseObject['status'] = 200;
+            responseObject['message'] = "ok";
         }catch(Exception ex){
-          println ex
+          Log.error(ex)
         }
     }
 

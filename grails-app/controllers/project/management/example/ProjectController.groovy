@@ -68,9 +68,13 @@ class ProjectController extends RestfulController {
 
     @Secured(['ROLE_MANAGER'])
     def delete(){
+        def responseObject = [:]
         def id = params.id;
         def projectInstance = Project.get(id);
         projectInstance.delete()
+        responseObject['status']= 200;
+        responseObject['message']= "ok";
+
     }
 
 
