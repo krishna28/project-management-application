@@ -6,6 +6,7 @@ class Role {
 
 	static mapping = {
         table 'table_role'
+        id name: 'role_id'
 		cache true
 	}
 

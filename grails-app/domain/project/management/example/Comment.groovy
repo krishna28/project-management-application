@@ -15,6 +15,7 @@ class Comment {
     }
     static mapping ={
         table 'table_comment'
+        id name: 'comment_id'
     }
 }
 
