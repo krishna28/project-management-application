@@ -21,6 +21,7 @@ class BootStrap {
             catch (e) {
                 println "Error occurred parsing DATABASE_URL: $e.message"
             }
+        }
 
 
         def saltString = grailsApplication.config.custom.security.saltString
