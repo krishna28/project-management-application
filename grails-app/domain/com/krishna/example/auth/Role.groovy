@@ -9,7 +9,6 @@ class Role {
 	}
 
 	static constraints = {
-        table 'SEC_ROLE'
 		authority blank: false, unique: true
 	}
 }

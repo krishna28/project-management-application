@@ -74,7 +74,7 @@ class ProjectController extends RestfulController {
         projectInstance.delete()
         responseObject['status']= 200;
         responseObject['message']= "ok";
-
+        respond responseObject
     }
 
 

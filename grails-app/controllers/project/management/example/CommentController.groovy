@@ -93,6 +93,7 @@ class CommentController extends RestfulController  {
             commentInstance.delete()
             responseObject['status'] = 200;
             responseObject['message'] = "ok";
+            respond commentInstance
         }catch(Exception ex){
           Log.error(ex)
         }

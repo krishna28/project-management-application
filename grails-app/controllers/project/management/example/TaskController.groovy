@@ -92,6 +92,7 @@ class TaskController extends RestfulController {
             taskInstance.delete()
             responseObject['status'] = 200;
             responseObject['message'] = "ok";
+            respond responseObject
 
         }catch(Exception e){
             Log.error(e);
