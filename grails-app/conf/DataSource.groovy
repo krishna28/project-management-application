@@ -41,12 +41,14 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "create"
+            dbCreate = "update"
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"
-            url = "jdbc:postgresql://qpckuzpbhpjeil:PcDj49WmtL5wbVXvaboP7UE1SV@ec2-54-243-249-132.compute-1.amazonaws.com:5432/d6r205vcrnqpbq?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory"
-            username = "qpckuzpbhpjeil"
-            password = "PcDj49WmtL5wbVXvaboP7UE1SV"
+            uri = new URI(System.env.DATABASE_URL)
+
+            url = "jdbc:postgresql://"+uri.host+uri.path
+            username = uri.userInfo.split(":")[0]
+            password = uri.userInfo.split(":")[1]
 
         }
     }

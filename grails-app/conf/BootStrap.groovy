@@ -26,12 +26,12 @@ class BootStrap {
 
         def saltString = grailsApplication.config.custom.security.saltString
 
-        if (Role.list().size() == 0) {
+        if (!Role.count()) {
             new Role(authority: "ROLE_MANAGER").save()
             new Role(authority: "ROLE_USER").save()
         }
 
-        if (User.list().size() == 0) {
+        if (!User.count()) {
             String salt = saltSource instanceof NullSaltSource ? null : saltString
             // spring security use username as salt for password encryption
             String encodedPassword = springSecurityService.encodePassword('root', salt)
