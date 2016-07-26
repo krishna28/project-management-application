@@ -37,7 +37,7 @@ environments {
 //            dbCreate = "update"
 //            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
 
-            dbCreate = "create"
+            dbCreate = "create-drop"
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"
             url = "jdbc:postgresql://qpckuzpbhpjeil:PcDj49WmtL5wbVXvaboP7UE1SV@ec2-54-243-249-132.compute-1.amazonaws.com:5432/d6r205vcrnqpbq?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory"

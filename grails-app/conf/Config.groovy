@@ -174,6 +174,9 @@ grails.plugin.springsecurity.filterChain.chainMap = [
         '/**': 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'   // Traditional chain
 ]
 
+grails.plugin.springsecurity.rest.token.validation.enableAnonymousAccess = true
+
+
 grails.plugin.springsecurity.rest.token.validation.active =	true
 //grails.plugin.springsecurity.rest.token.validation.headerName =	'X-Auth-Token'
 grails.plugin.springsecurity.rest.token.validation.endpointUrl =	'/api/validate'
