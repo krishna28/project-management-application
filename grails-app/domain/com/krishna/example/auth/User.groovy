@@ -24,7 +24,6 @@ class User {
 
 	static mapping = {
         table 'table_user'
-        id name: 'user_id'
 		password column: '`password`'
 	}
 

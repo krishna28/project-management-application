@@ -13,6 +13,5 @@ class Task {
 
     static mapping ={
         table 'table_task'
-        id name: 'task_id'
     }
 }

@@ -7,6 +7,12 @@ dataSource {
     username = "sa"
     password = ""
 }
+grails {
+    mongo {
+      
+    }
+}
+
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false

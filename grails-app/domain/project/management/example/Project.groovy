@@ -16,6 +16,5 @@ class Project {
     }
     static mapping ={
         table 'table_project'
-        id name: 'project_id'
     }
 }

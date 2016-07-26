@@ -8,6 +8,6 @@ class AuthToken {
     static constraints = {
     }
     static mapping = {
-        id name: 'token_id'
+
     }
 }
