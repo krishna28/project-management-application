@@ -176,4 +176,4 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 grails.plugin.springsecurity.rest.token.validation.active =	true
 //grails.plugin.springsecurity.rest.token.validation.headerName =	'X-Auth-Token'
-//grails.plugin.springsecurity.rest.token.validation.endpointUrl =	'/api/validate'
+grails.plugin.springsecurity.rest.token.validation.endpointUrl =	'/api/validate'

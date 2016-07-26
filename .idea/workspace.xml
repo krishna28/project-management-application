@@ -12,10 +12,7 @@
       <change type="DELETED" beforePath="F:\grailsProject2.3.11\project-management-application\target\work\plugins\webxml-1.4.1\scripts\_Events.groovy" afterPath="" />
       <change type="DELETED" beforePath="F:\grailsProject2.3.11\project-management-application\target\work\plugins\webxml-1.4.1\src\groovy\grails\plugin\webxml\FilterManager.groovy" afterPath="" />
       <change type="DELETED" beforePath="F:\grailsProject2.3.11\project-management-application\target\work\plugins\webxml-1.4.1\src\samples\_WebXmlConfig.groovy" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/application-config.properties" afterPath="$PROJECT_DIR$/grails-app/conf/application-config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project-management-application-grailsPlugins.iml" afterPath="$PROJECT_DIR$/project-management-application-grailsPlugins.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project-management-application.iml" afterPath="$PROJECT_DIR$/project-management-application.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/Config.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="project-management-application.iws" />
@@ -100,21 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application-config.properties" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="application-config.properties" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/application-config.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2060606" vertical-offset="0" max-vertical-offset="330">
-              <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ApplicationResources.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/ApplicationResources.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+              <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -133,8 +120,18 @@
       <file leaf-file-name="BuildConfig.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="1853">
+            <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="1853">
               <caret line="54" column="59" selection-start-line="54" selection-start-column="59" selection-end-line="54" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Config.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.67823344" vertical-offset="2811" max-vertical-offset="3128">
+              <caret line="178" column="49" selection-start-line="178" selection-start-column="49" selection-end-line="178" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -168,7 +165,6 @@
         <option value="$PROJECT_DIR$/grails-app/controllers/project/management/example/TaskController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/project/management/example/ProjectController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/project/management/example/CommentController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/com/krishna/example/auth/AuthToken.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/com/krishna/example/auth/Role.groovy" />
@@ -179,6 +175,7 @@
         <option value="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/application-config.properties" />
+        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
       </list>
     </option>
   </component>
@@ -689,12 +686,12 @@
       <workItem from="1469359708138" duration="27594000" />
       <workItem from="1469414477583" duration="2115000" />
       <workItem from="1469444356903" duration="29247000" />
-      <workItem from="1469533722548" duration="1949000" />
+      <workItem from="1469533722548" duration="3663000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135925000" />
+    <option name="totallyTimeSpent" value="137639000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-5" y="0" width="1288" height="687" extended-state="0" />
@@ -960,13 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1393" max-vertical-offset="3128">
-          <caret line="98" column="39" selection-start-line="98" selection-start-column="39" selection-end-line="98" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/grails-2.3.11/grails-2.3.11/lib/com.h2database/h2/jars/h2-1.3.176-sources.jar!/org/h2/command/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="85707" max-vertical-offset="98413">
@@ -1152,6 +1142,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/application-config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="1853">
@@ -1160,10 +1158,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/application-config.properties">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2060606" vertical-offset="0" max-vertical-offset="330">
-          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.67823344" vertical-offset="2811" max-vertical-offset="3128">
+          <caret line="178" column="49" selection-start-line="178" selection-start-column="49" selection-end-line="178" selection-end-column="49" />
           <folding />
         </state>
       </provider>
